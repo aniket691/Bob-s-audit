@@ -1,0 +1,16 @@
+<div class="container">
+  <h2>Highlight PDF Text</h2>
+
+  <!-- File Input -->
+  <input type="file" (change)="onFileSelected($event)" accept=".pdf" />
+
+  <!-- PDF Container -->
+  <div #pdfContainer class="pdf-container"></div>
+
+  <div *ngIf="isProcessing" class="processing-message">
+    <p>Processing PDF...</p>
+  </div>
+
+  <!-- Save Button -->
+  <button (click)="saveData()">Save Data</button>
+</div>
