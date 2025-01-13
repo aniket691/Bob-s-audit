@@ -31,7 +31,14 @@ const routes: Routes = [
       {
         path: 'sample-page',
         loadComponent: () => import('./demo/other/sample-page/sample-page.component')
+      },
+
+      { //pdf upload
+        path: 'pdf-upload',
+        loadComponent: () => import('./demo/other/pdf-upload/pdf-upload.component').then(m => m.default)
       }
+
+
     ]
   },
   {
