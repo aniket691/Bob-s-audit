@@ -114,6 +114,14 @@ export const NavigationItems: NavigationItem[] = [
         icon: 'chrome'
       },
       {
+        id: 'pdf-upload',
+        title: 'Upload Invoice',
+        type: 'item',
+        url: '/pdf-upload',
+        classes: 'nav-item',
+        icon: 'question'
+      },
+      {
         id: 'document',
         title: 'Document',
         type: 'item',
