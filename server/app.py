@@ -2,8 +2,11 @@ from flask import Flask, request, jsonify
 from PyPDF2 import PdfReader
 from openai import OpenAI
 import json
+from flask_cors import CORS  # Import CORS
 
 app = Flask(__name__)
+# Enable CORS for all routes
+CORS(app, origins="http://localhost:4200") 
 
 
 client = OpenAI(api_key="")
@@ -92,14 +95,10 @@ def extract_data():
 
     gpt_response = query_gpt4(f"Extract relevant data from the following text:\n{extracted_text}")
 
-    cleaned_data = json.loads(gpt_response)
+    print(gpt_response)
+    
 
-
-    cleaned_json = json.dumps(cleaned_data, indent=2)
-
-    print(cleaned_json)
-
-    return {"data": cleaned_json}
+    return {"data": gpt_response}
 
 if __name__ == '__main__':
     app.run(debug=True)

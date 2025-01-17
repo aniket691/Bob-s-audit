@@ -115,9 +115,17 @@ export const NavigationItems: NavigationItem[] = [
       },
       {
         id: 'pdf-upload',
-        title: 'Upload Invoice',
+        title: 'Upload Doc',
         type: 'item',
         url: '/pdf-upload',
+        classes: 'nav-item',
+        icon: 'question'
+      },
+      {
+        id: 'invoice-upload',
+        title: 'Upload Invoice',
+        type: 'item',
+        url: '/invoice-upload',
         classes: 'nav-item',
         icon: 'question'
       },

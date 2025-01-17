@@ -36,7 +36,12 @@ const routes: Routes = [
       { //pdf upload
         path: 'pdf-upload',
         loadComponent: () => import('./demo/other/pdf-upload/pdf-upload.component').then(m => m.default)
-      }
+      },
+      { //pdf upload
+        path: 'invoice-upload',
+        loadComponent: () => import('./demo/other/uploadinvoice/uploadinvoice.component').then(m => m.UploadinvoiceComponent)
+
+      },
 
 
     ]

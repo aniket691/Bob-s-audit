@@ -1,0 +1,34 @@
+<div class="upload-invoice">
+    <h2>Upload Invoice</h2>
+  
+    <!-- Drag and Drop Container -->
+    <div class="drag-drop-container" 
+         (dragover)="onDragOver($event)" 
+         (dragleave)="onDragLeave($event)"
+         (drop)="onDrop($event)" 
+         (click)="fileInput.click()">
+      <p>Drag and drop files here or click to select</p>
+      <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;" />
+    </div>
+  
+    <!-- Show upload status -->
+    <div class="upload-status-container">
+      <div *ngIf="isUploading" class="upload-status">
+        <p>{{ uploadMessage }}</p>
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Gallery -->
+    <div *ngIf="gallery.length > 0" class="gallery">
+      <h3>Uploaded Files:</h3>
+      <div *ngFor="let file of gallery; index as i" class="file-item">
+        <div class="file-preview">
+          <a [href]="file.url" target="_blank">{{ file.name }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
