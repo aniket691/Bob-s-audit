@@ -3,13 +3,20 @@ from PyPDF2 import PdfReader
 from openai import OpenAI
 import json
 from flask_cors import CORS  # Import CORS
+from dotenv import load_dotenv
+import os
 
-app = Flask(__name__)
+load_dotenv()
+
+app = Flask(_name_)
+
+api_key1 = os.getenv('API_KEY')
 # Enable CORS for all routes
-CORS(app, origins="http://localhost:4200") 
+CORS(app, resources={r"/*": {"origins": ["http://localhost:4200", "http://localhost:5173"]}})
 
 
-client = OpenAI(api_key="")
+
+client = OpenAI(api_key=api_key1)
 
 def extract_text_from_pdf(pdf_path):
     """
@@ -26,40 +33,13 @@ def extract_text_from_pdf(pdf_path):
 
 def query_gpt4(extracted_text):
     prompt = f"""
-    You are an AI assistant specialized in extracting invoice data from various formats. Analyze the following text extracted from an invoice PDF and return the data in a structured JSON format. Follow these guidelines:
-
-    1. Identify and extract all relevant invoice information, including but not limited to:
-       - Invoice number
-       - Invoice date
-       - Due date
-       - Vendor/Seller information (name, address, contact details)
-       - Customer/Buyer information (name, address, contact details)
-       - Line items (description, quantity, unit price, total)
-       - Subtotal
-       - Tax amounts (and rates if available)
-       - Total amount due
-       - Payment terms
-       - Any additional fees or discounts
-
-    2. If a field is not present in the invoice, omit it from the JSON output.
-
-    3. For line items, create an array of objects, each representing a single item.
-
-    4. Use appropriate data types (string, number, array) for each field.
-
-    5. If dates are present, format them as "YYYY-MM-DD" if possible.
-
-    6. If currency is specified, include it in the relevant fields.
-
-    7. If you encounter any ambiguous or unclear information, add a "notes" field to the JSON with explanations.
-
-    8. Maintain the original naming conventions found in the invoice where possible.
-
-    Extracted text from the PDF:
-
+    You are an AI assistant specialized in extracting invoice data from various formats. Analyze the following text extracted from an invoice PDF and  translate into english return the data in a structured JSON format.
+    Extract text from an invoice file written in Any language, translate it into English, and organize the data into key-value pairs in JSON format.
+    only provide json 
     {extracted_text}
-
-    Please provide the structured JSON data for this invoice.  Do not add escape characters like \n or \ in the JSON. Make sure the fields are appropriately structured.
+    
+    
+    Please provide the structured JSON data for this invoice.
     """
 
     try:
@@ -100,5 +80,5 @@ def extract_data():
 
     return {"data": gpt_response}
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     app.run(debug=True)
